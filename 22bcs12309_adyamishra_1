@@ -1,0 +1,34 @@
+import java.util.*;
+
+class CardCollection {
+    private Map<String, List<String>> cardMap;
+
+    public CardCollection() {
+        cardMap = new HashMap<>();
+    }
+
+    public void addCard(String symbol, String cardName) {
+        cardMap.putIfAbsent(symbol, new ArrayList<>());
+        cardMap.get(symbol).add(cardName);
+    }
+
+    public List<String> getCardsBySymbol(String symbol) {
+        return cardMap.getOrDefault(symbol, new ArrayList<>());
+    }
+
+    public void displayAllCards() {
+        for (Map.Entry<String, List<String>> entry : cardMap.entrySet()) {
+            System.out.println("Symbol: " + entry.getKey() + " -> Cards: " + entry.getValue());
+        }
+    }
+
+    public static void main(String[] args) {
+        CardCollection collection = new CardCollection();
+        collection.addCard("Heart", "Ace of Hearts");
+        collection.addCard("Spade", "King of Spades");
+        collection.addCard("Heart", "Queen of Hearts");
+
+        System.out.println("Cards in Heart: " + collection.getCardsBySymbol("Heart"));
+        collection.displayAllCards();
+    }
+}
